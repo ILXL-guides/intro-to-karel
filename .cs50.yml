@@ -1,0 +1,9 @@
+lab50:
+  window:
+    - editor
+    - readme
+    - terminal
+    - x
+  files:
+    - !include main.cc
+    
