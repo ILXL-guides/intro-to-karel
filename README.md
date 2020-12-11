@@ -8,6 +8,8 @@ Show some pictures or a gif
 Explain about walls, beepers, and actions
 Explain about boolean maybe
 
+{% next %}
+
 ## Setup
 
 *You can follow this guide from your own machine, or try from [lab.cs50.io](https://lab.cs50.io/ILXL-guides/intro-to-karel). If you are not using CS50, you will see some markdown for cs50 using curly braces and percentage signs, which you can ignore.*
@@ -36,9 +38,10 @@ make build
 
 This should open a Karel the Robot window showing Karel in a small world with several walls and one beeper.
 
-### Accessibility set-up
+### Optional: Accessibility set-up
 
 #### Export to CSV
+
 If you would like to view Karel's world in a spreadsheet instead of an image (which may be helpful for screen-reader users), add the following line to ``main.cc`` between ``LoadWorld`` and ``KarelProgram``:
 
 ```cpp
@@ -56,3 +59,5 @@ EnablePromptBeforeAction();
 ```
 
 This will cause Karel to wait for you to enter any character in the command line before taking the next action.
+
+{% next %}
