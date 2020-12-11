@@ -2,7 +2,7 @@
 
 An overview of how to use Karel the Robot in C++.
 
-## What is Karel the Robot?  
+## Who is Karel the Robot?
 
 Karel the Robot is a gentle introductory programming language created by [Dr. Richard Pattis](https://www.ics.uci.edu/~pattis/) in [*Karel the Robot: A Gentle Introduction to The Art of Programming*](https://www.google.com/books/edition/_/ghcZAQAAIAAJ?hl=en&gbpv=1) and implemented in C++ with his permission. The Karel language emphasizes logic while hiding tricky syntax, allowing anyone to begin making exciting graphical programs with very little background.
 
@@ -70,11 +70,11 @@ Karel lives in a two-dimensional world, where each cell in the grid can be ident
 
 Karel the Robot may occupy one cell at a time. In addition to a position, Karel has an orientation in the world: they may be facing north (up), east (towards the right edge), south (down), or west (towards the left edge).
 
-In the example below, Karel is standing at cell (1, 1) and facing east. There is a beeper in the top right at (3, 3). In addition, there are a few walls in the world.
+In the example below, Karel is standing at cell (1, 1) and facing east. There is a beeper in the top right at (3, 3). Also we can see that there are a few walls in the world.
 
 ![Karel in a 3x3 grid at (1,1) facing east](resources/karel_3x3.png)
 
-In addition, although you can't see it in the picture, Karel has a bag of beepers. This bag may be empty or it may have beepers in it.
+Although it's not drawn in the image, Karel has a bag of beepers. This bag may be empty or it may have beepers in it.
 
 ## Moving Karel
 
@@ -178,11 +178,35 @@ void KarelProgram() {
 
 {% next %}
 
-## Checking world conditions
+## Checking world and Karel conditions
 
-// TODO
+In addition to the four commands discussed above, Karel can check the state of themself and their world. Karel is able to check whether or not there is a wall or edge to the front, left or right of where they are currently standing. They are able to check whether or not there are beepers in the cell where they are standing, and whether or not they have beepers in their bag. And they are able to check whether or not they are facing north, south, east or west.
+
+Following are the conditionals Karel knows about:
+
+| Condition | Opposite | Meaning |
+|-----------|----------|---------|
+|`FrontIsClear();`|`FrontIsBlocked();`|Whether there is a wall or edge directly in front of Karel|
+|`LeftIsClear();`|`LeftIsBlocked();`|Whether there is a wall or edge directly to Karel's left|
+|`RightIsClear();`|`RightIsBlocked();`|Whether there is a wall or edge directly to Karel's right|
+|`FacingNorth();`|`NotFacingNorth();`|Whether Karel is facing north (up)|
+|`FacingEast();`|`NotFacingEast();`|Whether Karel is facing east (right)|
+|`FacingSouth();`|`NotFacingSouth();`|Whether Karel is facing south (down)|
+|`FacingWest();`|`NotFacingWest();`|Whether Karel is facing west (left)|
+|`BeepersPresent();`|`NoBeepersPresent();`|Whether there is a beeper in the cell that Karel occupies|
+|`HasBeepersInBag();`|`NoBeepersInBag();`|Whether Karel has any beepers in their bag|
+
+These conditionals may be used in ``while`` and ``if`` statements to help Karel make informed decisions about how to interact with their world.
+
+### Your turn
+
+// TODO: What should people try here?
 
 {% next %}
+
+## Programming challenges with Karel
+
+The following challenges allow you to practice with Karel commands and conditionals.
 
 ## Resources
 
