@@ -6,9 +6,17 @@ An overview of how to use Karel the Robot in C++.
 
 Karel the Robot is a gentle introductory programming language created by [Dr. Richard Pattis](https://www.ics.uci.edu/~pattis/) in [*Karel the Robot: A Gentle Introduction to The Art of Programming*](https://www.google.com/books/edition/_/ghcZAQAAIAAJ?hl=en&gbpv=1) and implemented in C++ with his permission. The Karel language emphasizes logic while hiding tricky syntax, allowing anyone to begin making exciting graphical programs with very little background.
 
+![image of Karel the Robot in a world with several walls and one beeper](resources/karel.png)
+
 Karel lives in a two-dimensional grid and has a position and an orientation (north, east, south or west). Each cell of the grid may contain one or more beepers, or no beepers at all. Karel has a bag of beepers (which may be empty). Cells may be separated by walls.
 
-Karel has four actions: they can move forward, turn left, put down a beeper or pick up a beeper. In addition, Karel is able to check state of the area around themselves. Karel cannot move through walls or off the edge of the world.
+Karel only responds to four commands: they can move forward, turn left, put down a beeper or pick up a beeper. In addition, Karel is able to check state of the area around themselves. Karel cannot move through walls or off the edge of the world.
+
+### Why are we using Karel?
+
+Programs using Karel are true C++ programs but have a very limited scope because Karel only has four possible commands.
+
+> "By starting with Karel, you can concentrate on solving problems from the very beginning. Problem solving is the essence of programming. And because Karel encourages imagination and creativity, you can have quite a lot of fun along the way." -[Stanford's Karel Reader](https://compedu.stanford.edu/karel-reader/docs/java/en/chapter1.html)
 
 {% next %}
 
@@ -23,7 +31,7 @@ Karel has four actions: they can move forward, turn left, put down a beeper or p
 git clone https://github.com/ILXL/cpputils
 ```
 
-3. Now you can build Karel the Robot programs. We've provided a blank Karel program in ``main.cc``, and a ``Makefile`` that contains the build commands. Make sure you can build it and run it with:
+3. Now you can build Karel the Robot programs. We've provided a blank Karel program in ``main.cc``, and a ``Makefile`` that contains the build commands. Make sure you can build it and run it with these commands in the terminal:
 ```
 make build
 ./main
@@ -56,11 +64,29 @@ This will cause Karel to wait for you to enter any character in the command line
 
 {% next %}
 
-## Controlling Karel
+## Understanding Karel's world
 
-Karel can move through the world using two actions: they can ``Move()`` forward or ``TurnLeft()``.
+Karel lives in a two-dimensional world, where each cell in the grid can be identified by its vertical column and horizontal row. For example, the bottom-left cell is at column 1 and row 1, so we call it (1, 1). The next cell to the east from (1, 1) is (2, 1), i.e. the cell in the second column and first row.
 
-In ``main.cc`` you can edit the ``KarelProgram()`` function to get Karel to move around their world. Try it: edit your ``KarelProgram()`` function to look like this (don't forget the semicolon at the end of the line!):
+Karel the Robot may occupy one cell at a time. In addition to a position, Karel has an orientation in the world: they may be facing north (up), east (towards the right edge), south (down), or west (towards the left edge).
+
+In the example below, Karel is standing at cell (1, 1) and facing east. There is a beeper in the top right at (3, 3). In addition, there are a few walls in the world.
+
+![Karel in a 3x3 grid at (1,1) facing east](resources/karel_3x3.png)
+
+In addition, although you can't see it in the picture, Karel has a bag of beepers. This bag may be empty or it may have beepers in it.
+
+## Moving Karel
+
+Karel can move through the world using two actions: they can ``Move();`` forward or ``TurnLeft();`` to rotate.
+
+* The command ``Move();`` will move Karel forward one cell in the direction it is facing. If Karel cannot move forward because it is blocked by a wall or an edge the program will display an error.
+
+* The command ``TurnLeft();`` will rotate Karel 90 degrees to the left (counter-clockwise).
+
+### Your turn
+
+In the file ``main.cc`` you can edit the ``KarelProgram()`` function to get Karel to move around their world. Try it: edit your ``KarelProgram()`` function to look like this (don't forget the parenthesis and semicolon after each command!):
 
 ```cpp
 void KarelProgram() {
@@ -75,7 +101,7 @@ make build
 ./main
 ```
 
-Try adding a ``TurnLeft()``:
+Try adding a ``TurnLeft();``:
 ```cpp
 void KarelProgram() {
   Move();
@@ -83,7 +109,7 @@ void KarelProgram() {
 }
 ```
 
-Can you modify your Karel program to have Karel walk out the door of their house and stand on top of the beeper? Combine ``Move()`` and ``TurnLeft()`` commands until you have Karel in the right spot. If you need a hint you can look at the example below.
+Can you modify your Karel program to have Karel walk out the door of their house and stand on top of the beeper? Combine ``Move();`` and ``TurnLeft();`` commands until you have Karel in the right spot. If you need a hint you can look at the example below.
 
 {% spoiler Example %}
 
@@ -105,3 +131,61 @@ void KarelProgram() {
 {% endspoiler %}
 
 {% next %}
+
+## Interacting with Beepers
+
+Karel is able to pick up beepers from the world and store them in their beeper bag with the command ``PickBeeper();``. They are also able to put beepers from their bag down into the world using the command ``PutBeeper();``
+
+* The command ``PickBeeper();`` will cause Karel to pick up a beeper from the cell where they are standing. If they are not standing on a beeper this will result in an error.
+
+* The command ``PutBeeper();`` will cause Karel to put down a beeper into the cell where they are standing, but this will result in an error if Karel doesn't have any beepers left in their bag.
+
+### Your turn
+
+Modify the ``KarelProgram()`` to pick up the beeper from outside Karel's house. Then, move Karel back to their starting cell at (3, 4) and put down the beeper.
+
+Test your program with ``make build`` and ``./main`` from the command line. It's OK if you don't get it in the first try!
+
+{% spoiler Example solution %}
+
+```cpp
+void KarelProgram() {
+  Move();
+  Move();
+  // It takes three left turns to make a right.
+  TurnLeft();
+  TurnLeft();
+  TurnLeft();
+  Move();
+  TurnLeft();
+  Move();
+  // Should be on the beeper now!
+  PickBeeper();
+  TurnLeft();
+  TurnLeft();
+  Move();
+  Move();
+  Move();
+  TurnLeft();
+  TurnLeft();
+  TurnLeft();
+  Move();
+  PutBeeper();
+}
+```
+
+{% endspoiler %}
+
+{% next %}
+
+## Checking world conditions
+
+// TODO
+
+{% next %}
+
+## Resources
+
+[Karel Reader](https://compedu.stanford.edu/karel-reader/docs/java/en/chapter1.html): A similar tutorial from Stanford about Karel in Java.
+
+[Karel the Robot learns Java](https://cs.stanford.edu/people/eroberts/karel-the-robot-learns-java.pdf): a guide to Karel from Stanford (in Java, but most concepts apply here, although our Karel is functional programming rather than object-oriented).
