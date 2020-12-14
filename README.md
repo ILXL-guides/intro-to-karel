@@ -6,17 +6,17 @@ An overview of how to use Karel the Robot in C++.
 
 Karel the Robot is a gentle introductory programming language created by [Dr. Richard Pattis](https://www.ics.uci.edu/~pattis/) in [*Karel the Robot: A Gentle Introduction to The Art of Programming*](https://www.google.com/books/edition/_/ghcZAQAAIAAJ?hl=en&gbpv=1) and implemented in C++ with his permission. The Karel language emphasizes logic while hiding tricky syntax, allowing anyone to begin making exciting graphical programs with very little background.
 
+Below is a screenshot of little Karel standing in their two-dimensional world at the intersection of the 4th column and 4th row. They are facing east (right). Around them are walls, and there is a break in the walls that allows Karel to access a purple beeper.
+
 ![image of Karel the Robot in a world with several walls and one beeper](resources/karel.png)
 
-Karel lives in a two-dimensional grid and has a position and an orientation (north, east, south or west). Each cell of the grid may contain one or more beepers, or no beepers at all. Karel has a bag of beepers (which may be empty). Cells may be separated by walls.
-
-Karel only responds to four commands: they can move forward, turn left, put down a beeper or pick up a beeper. In addition, Karel is able to check state of the area around themselves. Karel cannot move through walls or off the edge of the world.
+Karel is a simple robot and only responds to four commands: they can move forward, turn left, put down a beeper or pick up a beeper. In addition, Karel is able to check state of the area around themselves. Karel cannot move through walls or off the edge of the world.
 
 ### Why are we using Karel?
 
-Programs using Karel are true C++ programs but have a very limited scope because Karel only has four possible commands.
-
 > "By starting with Karel, you can concentrate on solving problems from the very beginning. Problem solving is the essence of programming. And because Karel encourages imagination and creativity, you can have quite a lot of fun along the way." -[Stanford's Karel Reader](https://compedu.stanford.edu/karel-reader/docs/java/en/chapter1.html)
+
+Programs using Karel are true C++ programs but have a very limited scope, reducing the opportunities for novice programmers to run into tricky syntax and compiler errors.
 
 {% next %}
 
@@ -40,27 +40,9 @@ make build
 
 This should open a Karel's world in a window, which displays Karel in their grid with several walls and one beeper.
 
-### Optional: Accessibility set-up
+### Accessibility setup
 
-#### Export to CSV
-
-If you would like to view Karel's world in a spreadsheet instead of an image (which may be helpful for screen-reader users), add the following line to ``main.cc`` between ``LoadWorld`` and ``KarelProgram``:
-
-```cpp
-EnableCSVOutput();
-```
-
-This will generate a file, ``karel.csv``, which is a representation of Karel's world in spreadsheet form. Karel will wait for you to enter any character on the command line to take the next action, and each time it takes an action it will update ``karel.csv``. There is a key within the spreadsheet explaining how to interpret it.
-
-#### Control animation rate
-
-If you would like control over the rate at which Karel executes you can add the following line to ``main.cc`` between ``LoadWorld`` and ``KarelProgram``:
-
-```cpp
-EnablePromptBeforeAction();
-```
-
-This will cause Karel to wait for you to enter any character in the command line before taking the next action.
+There are methods to make Karel accessible for screen-reader users and those who need to control animation timing. Please see the [C++ Utils wiki](https://github.com/ILXL/cpputils/wiki/Karel-Accessibility).
 
 {% next %}
 
@@ -80,13 +62,13 @@ Although it's not drawn in the image, Karel has a bag of beepers. This bag may b
 
 Karel can move through the world using two actions: they can ``Move();`` forward or ``TurnLeft();`` to rotate.
 
-* The command ``Move();`` will move Karel forward one cell in the direction it is facing. If Karel cannot move forward because it is blocked by a wall or an edge the program will display an error.
+* The command ``Move();`` will move Karel forward one cell in the direction they are facing. If Karel cannot move forward, because they are blocked by a wall or an edge, the program will display an error.
 
 * The command ``TurnLeft();`` will rotate Karel 90 degrees to the left (counter-clockwise).
 
 ### Your turn
 
-In the file ``main.cc`` you can edit the ``KarelProgram()`` function to get Karel to move around their world. Try it: edit your ``KarelProgram()`` function to look like this (don't forget the parenthesis and semicolon after each command!):
+In the file ``main.cc`` you can edit the ``KarelProgram()`` function to get Karel to move around their world. Try it: edit your ``KarelProgram()`` function to look like this:
 
 ```cpp
 void KarelProgram() {
@@ -202,11 +184,11 @@ These conditions may be checked in ``while`` and ``if`` statements to help Karel
 
 ### Your turn
 
-Let's write a program to get Karel to clean up all the beepers in the row where y is 1, ``CleanupBeepersKarel.w``.
+Let's write a program to get Karel to clean up all the beepers in the row where y is 1.
 
-If we knew ahead of time how many beepers were on each cell it would be easy to simply have Karel ``PickBeeper();`` and then ``Move();`` over and over. But in ``CleanupBeepersKarel`` there may be more than one beeper on a cell, or none at all! Karel will need to use conditionals to decide when to remove a beeper and how many to remove.
+If we knew ahead of time how many beepers were on each cell it would be easy to simply have Karel ``PickBeeper();`` and then ``Move();`` over and over. But in the world file ``worlds/CleanupBeepersKarel.w`` there may be more than one beeper on a cell, or none at all! Karel will need to use conditionals to decide when to remove a beeper and how many to remove.
 
-First, edit the ``main()`` function in ``main.cc`` to load ``CleanupBeepersKarel.w`` instead of ``CollectNewspaperKarel.w``.
+First, edit the ``main()`` function in ``main.cc`` to load ``worlds/CleanupBeepersKarel.w`` instead of ``worlds/CollectNewspaperKarel.w``.
 
 Then, replace the code in ``KarelProgram``.
 
