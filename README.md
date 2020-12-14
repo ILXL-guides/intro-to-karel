@@ -182,7 +182,7 @@ void KarelProgram() {
 
 In addition to the four commands discussed above, Karel can check the state of themself and their world. Karel is able to check whether or not there is a wall or edge to the front, left or right of where they are currently standing. They are able to check whether or not there are beepers in the cell where they are standing, and whether or not they have beepers in their bag. And they are able to check whether or not they are facing north, south, east or west.
 
-Following are the conditionals Karel knows about:
+Following are the conditions Karel knows about:
 
 | Condition | Opposite | Meaning |
 |-----------|----------|---------|
@@ -196,17 +196,59 @@ Following are the conditionals Karel knows about:
 |`BeepersPresent();`|`NoBeepersPresent();`|Whether there is a beeper in the cell that Karel occupies|
 |`HasBeepersInBag();`|`NoBeepersInBag();`|Whether Karel has any beepers in their bag|
 
-These conditionals may be used in ``while`` and ``if`` statements to help Karel make informed decisions about how to interact with their world.
+*Note: Each of these functions returns the boolean value ``true`` or the boolean value ``false``.*
+
+These conditions may be checked in ``while`` and ``if`` statements to help Karel make informed decisions about how to interact with their world.
 
 ### Your turn
 
-// TODO: What should people try here?
+Let's write a program to get Karel to clean up all the beepers in the row where y is 1, ``CleanupBeepersKarel.w``.
+
+If we knew ahead of time how many beepers were on each cell it would be easy to simply have Karel ``PickBeeper();`` and then ``Move();`` over and over. But in ``CleanupBeepersKarel`` there may be more than one beeper on a cell, or none at all! Karel will need to use conditionals to decide when to remove a beeper and how many to remove.
+
+First, edit the ``main()`` function in ``main.cc`` to load ``CleanupBeepersKarel.w`` instead of ``CollectNewspaperKarel.w``.
+
+Then, replace the code in ``KarelProgram``.
+
+Below is an example solution, but try it yourself before looking at this!
+
+{% spoiler Example solution %}
+
+```cpp
+void KarelProgram() {
+  while (true) {
+    while (BeepersPresent()) {
+      PickBeeper();
+    }
+    if (FrontIsClear()) {
+      Move();
+    } else {
+      return;
+    }
+  }
+}
+
+int main() {
+  LoadWorld("worlds/CleanupBeepersKarel.w");
+  KarelProgram();
+  Finish();
+  return 0;
+}
+```
+
+{% endspoiler %}
+
+### Extra challenge
+
+Can you edit your program to clean up all the beepers in the world, not just those on the row where y is 1?
+
+Can you do the same thing without hard-coding any integers - instead only using conditional statements and while loops?
 
 {% next %}
 
 ## Programming challenges with Karel
 
-The following challenges allow you to practice with Karel commands and conditionals.
+TODO: add challenges allowing students to practice with Karel commands and conditionals.
 
 ## Resources
 
