@@ -4,7 +4,7 @@ An overview of how to use Karel the Robot in C++.
 
 ## Who is Karel the Robot?
 
-Karel the Robot is a gentle introductory programming language created by [Dr. Richard Pattis](https://www.ics.uci.edu/~pattis/) in [*Karel the Robot: A Gentle Introduction to The Art of Programming*](https://www.google.com/books/edition/_/ghcZAQAAIAAJ?hl=en&gbpv=1) and implemented in C++ with his permission. The Karel language emphasizes logic while hiding tricky syntax, allowing anyone to begin making exciting graphical programs with very little background.
+Karel the Robot is a gentle introductory programming language created by [Professor Richard Pattis](https://www.ics.uci.edu/~pattis/) in [*Karel the Robot: A Gentle Introduction to The Art of Programming*](https://www.google.com/books/edition/_/ghcZAQAAIAAJ?hl=en&gbpv=1) and implemented in C++ with his permission. The Karel language emphasizes logic while hiding tricky syntax, allowing anyone to begin making exciting graphical programs with very little background.
 
 Below is a screenshot of little Karel standing in their two-dimensional world at the intersection of the 4th column and 4th row. They are facing east (right). Around them are walls, and there is a break in the walls that allows Karel to access a purple beeper.
 
